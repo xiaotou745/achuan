@@ -1,6 +1,5 @@
 package com.achuan.helper;
 
-
 public class ParseHelper {
 	public static int ToInt(Object o, int defaultValue){
 		int result = defaultValue;
