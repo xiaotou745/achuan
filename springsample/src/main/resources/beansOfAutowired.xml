@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<bean id="userBean" class="com.achuan.springsample.UserBean">
+		<property name="userId" value="1" />
+		<property name="userName" ref="beimai"></property>
+	</bean>
+	<!-- 如果有两个类型的UserDao bean的定义，则会报错：No qualifying bean of
+	 *            type [com.achuan.springsample.UserDao] is defined: expected
+	 *            single matching bean but found 2: userDao1,userDao2 
+	 *   如果没有此类型的定义，也会报BeanCreationException异常-->
+	<bean id="userDao1" class="com.achuan.springsample.UserDao"></bean>
+	<bean id="userDao2" class="com.achuan.springsample.UserDao"></bean>
+	<bean id="message" class="java.lang.String">
+		<constructor-arg index="0" value="hello" />
+	</bean>
+	<bean id="beimai" class="java.lang.String">
+		<constructor-arg index="0" value="beimai"></constructor-arg>
+	</bean>
+
+	<bean id="bean" class="com.achuan.springsample.autowired.BeanOfAutowired"></bean>
+
+	<bean id="beanInjectByConstructor" class="com.achuan.springsample.autowired.BeanOfAutowired">
+		<constructor-arg name="userBean" ref="userBean"></constructor-arg>
+	</bean>
+</beans>

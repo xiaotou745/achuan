@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />   
+	<bean id="bean" class="com.achuan.springsample.autowired.BeanOfAutowired"></bean>
+	<bean id="userBean" class="com.achuan.springsample.UserBean">
+		<property name="userId" value="1" />
+		<property name="userName" ref="beimai"></property>
+	</bean>
+	<bean id="message" class="java.lang.String">
+		<constructor-arg index="0" value="hello" />
+	</bean>
+	<bean id="beimai" class="java.lang.String">
+		<constructor-arg index="0" value="beimai"></constructor-arg>
+	</bean>
+
+
+	<bean id="beanInjectByConstructor" class="com.achuan.springsample.xml.BeanOfXml">
+		<constructor-arg name="message" ref="message" />
+		<constructor-arg name="userBean" ref="userBean"></constructor-arg>
+		<!-- <constructor-arg index="1" ref="message" /> 
+		<constructor-arg name="0" ref="userBean"></constructor-arg> -->
+	</bean>
+</beans>
