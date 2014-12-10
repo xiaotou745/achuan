@@ -22,16 +22,20 @@ import com.achuan.springsample.UserDao;
 public class BeanOfAutowired {
 	private String message;
 	private UserBean userBean;
+	/**
+	 * 字段注入：通过将@Autowired注解放在字段上来完成字段注入。
+	 */
 	@Autowired
+	// 字段注入
 	private String beimai;
 
 	/**
-	 * @Autowired 是根据类型进行自动装配的。例如，如果当Spring上下文中存在不止一个UserDao类型的bean时，
-	 *            就会抛出BeanCreationException异常
-	 *            ;如果Spring上下文中不存在UserDao类型的bean，也会抛出BeanCreationException异常
-	 *            。我们可以使用@Qualifier配合@Autowired来解决这些问题。 如下： No qualifying bean
-	 *            of type [com.achuan.springsample.UserDao] is defined: expected
-	 *            single matching bean but found 2: userDao1,userDao2
+	 * {@code}@Autowired 是根据类型进行自动装配的。例如，如果当Spring上下文中存在不止一个UserDao类型的bean时，
+	 * 就会抛出BeanCreationException异常
+	 * ;如果Spring上下文中不存在UserDao类型的bean，也会抛出BeanCreationException异常
+	 * 。我们可以使用@Qualifier配合@Autowired来解决这些问题。 如下： No qualifying bean of type
+	 * [com.achuan.springsample.UserDao] is defined: expected single matching
+	 * bean but found 2: userDao1,userDao2 {@code @Qualifier：限定描述符，用于细粒度选择候选者；}
 	 */
 	@Autowired
 	@Qualifier("userDao1")
@@ -40,32 +44,37 @@ public class BeanOfAutowired {
 	/**
 	 * 此属性注入不会报错，貌似根据名称找到了。
 	 */
-	@Autowired(required = false)
+	@Autowired(required = true)
+	@Qualifier("userDao2")
 	private UserDao userDao2;
 
-	public UserDao getUserDao2() {
-		return userDao2;
-	}
-
-	public void setUserDao2(UserDao userDao2) {
-		this.userDao2 = userDao2;
+	/**
+	 * 方法参数注入：通过将@Autowired注解放在方法上来完成方法参数注入。
+	 * 
+	 * @param message
+	 * @see 方法参数注入除了支持setter方法注入，还支持1个或多个参数的普通方法注入，在基于XML配置中
+	 *      不支持1个或多个参数的普通方法注入，方法注入不支持静态类型方法的注入。
+	 */
+	@Autowired
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public BeanOfAutowired() {
 	}
 
+	/**
+	 * 构造器注入：通过将@Autowired注解放在构造器上来完成构造器注入，默认构造器参数通过类型自动装配，如下所示：
+	 * 
+	 * @param userBean
+	 */
 	@Autowired
 	public BeanOfAutowired(UserBean userBean) {
-		this.setUserBean(userBean);
+		this.userBean = userBean;
 	}
 
 	public String getMessage() {
 		return message;
-	}
-
-	@Autowired
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public String getBeimai() {
@@ -92,4 +101,11 @@ public class BeanOfAutowired {
 		this.userDao = userDao;
 	}
 
+	public UserDao getUserDao2() {
+		return userDao2;
+	}
+
+	public void setUserDao2(UserDao userDao2) {
+		this.userDao2 = userDao2;
+	}
 }

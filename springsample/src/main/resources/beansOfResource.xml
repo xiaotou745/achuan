@@ -13,23 +13,15 @@
 	<bean id="beimai" class="java.lang.String">
 		<constructor-arg index="0" value="beimai"></constructor-arg>
 	</bean>
-	
 	<bean id="userBean" class="com.achuan.springsample.UserBean">
 		<property name="userId" value="1" />
 		<property name="userName" ref="beimai"></property>
 	</bean>
 	
-	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /> -->
-	<context:annotation-config />
-	<!-- 定义两个不同名称的UserDao bean -->
 	<bean id="userDao1" class="com.achuan.springsample.UserDao"></bean>
-	<bean id="userDao2" class="com.achuan.springsample.UserDao"></bean>
 
-	<!-- 默认构造函数对象 -->
-	<bean id="bean" class="com.achuan.springsample.autowired.BeanOfAutowired"></bean>
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" /> 
 
-	<!-- 构造函数注入bean对象，注入一个userBean -->
-	<bean id="beanInjectByConstructor" class="com.achuan.springsample.autowired.BeanOfAutowired">
-		<constructor-arg name="userBean" ref="userBean"></constructor-arg>
-	</bean>
+	<bean id="bean" class="com.achuan.springsample.resource.BeanOfResource"></bean>
+
 </beans>
