@@ -9,5 +9,6 @@
 		<module>core</module>
 		<module>springsample</module>
     <module>redissample</module>
+    <module>springweb</module>
   </modules>
 </project>
