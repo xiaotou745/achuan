@@ -10,5 +10,6 @@
 		<module>springsample</module>
     <module>redissample</module>
     <module>springweb</module>
+    <module>logsample</module>
   </modules>
 </project>

@@ -14,7 +14,9 @@
 
 	<!-- 引入配置文件 -->
 	
-	<context:component-scan base-package="com.achuan.*" />
+	<!-- <context:component-scan base-package="com.achuan.**" />
+	 -->
+	<bean id="helloWordService" class="com.achuan.redissample.HelloWordService"></bean>
 
 	<mvc:annotation-driven />
 
